@@ -75,11 +75,9 @@ def create_dictionary(messages):
             else:
                 temp = [word,1]
                 elDiccionario.append(temp)
-                awe = 1
+               
                 # elDiccionario[0].append(word)
                 # elDiccionario[1].append(1)
-
-
 
     a=1
 
