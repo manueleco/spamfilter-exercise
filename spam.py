@@ -8,7 +8,6 @@ import pandas as pd
 from collections import Counter
 
 
-
 def get_words(message):
     """Get the normalized list of words from a message string.
 
@@ -28,11 +27,9 @@ def get_words(message):
     mensajePartido = message.split(' ')
     for mensajePartido in mensajePartido:
         palabrasArray.append(mensajePartido.lower())
-    
 
     return palabrasArray
 
-        
     # *** END CODE HERE ***
 
 
@@ -53,6 +50,36 @@ def create_dictionary(messages):
     """
 
     # *** START CODE HERE ***
+    # ** Diccionario creado agregando palabras **
+    # allMensajes = messages
+    # variablerandom = []
+    # elPreDiccionario = []
+    # elDiccionario = []
+    # elVerdadero = []
+
+    # for elMensaje in allMensajes:
+    #     variablerandom = get_words(elMensaje)
+    #     for men in variablerandom:
+    #         elPreDiccionario.append(men)
+
+    # for mensaje in allMensajes:
+    #     words = list(dict.fromkeys(get_words(mensaje)))
+    #     for word in words:
+    #         if word in elDiccionario[0]:
+    #             indice = elDiccionario[0].index(word)
+    #             elDiccionario[1][indice] +=1
+    #             # print(elDiccionario)
+    #             # elDiccionario[indice][1] = int(elDiccionario[indice][1])+1
+    #         else:
+    #             temp = [word,1]
+    #             elDiccionario.append(temp)
+
+    #             # elDiccionario[0].append(word)
+    #             # elDiccionario[1].append(1)
+
+    # a=1
+
+    # ** Diccionario creado quitando palabras **
     allMensajes = messages
     variablerandom = []
     elPreDiccionario = []
@@ -63,46 +90,25 @@ def create_dictionary(messages):
         variablerandom = get_words(elMensaje)
         for men in variablerandom:
             elPreDiccionario.append(men)
-    
-    for mensaje in allMensajes:
-        words = list(dict.fromkeys(get_words(mensaje)))
-        for word in words:
-            if word in elDiccionario[0]:
-                indice = elDiccionario[0].index(word)
-                elDiccionario[1][indice] +=1
-                # print(elDiccionario)
-                # elDiccionario[indice][1] = int(elDiccionario[indice][1])+1
-            else:
-                temp = [word,1]
-                elDiccionario.append(temp)
-               
-                # elDiccionario[0].append(word)
-                # elDiccionario[1].append(1)
 
-    a=1
+    elDiccionario = set(elPreDiccionario)
+    elDiccionario = list(elDiccionario)
 
+    contador = 0
+    print("Len 1: ", len(elDiccionario))
+    for comp in elDiccionario:
+        for mensaje in allMensajes:
+            if(mensaje.find(comp) != -1):
+                contador += 1
+                break
+            if(contador >= 5):
+                break
+        if(contador < 5):
+            elDiccionario.remove(comp)
 
+        contador = 0
 
-
-# ====== forma ineficiente ========
-    # elDiccionario = set(elPreDiccionario) 
-    # elDiccionario = list(elDiccionario)
-
-    # contador = 0
-    # for comp in elDiccionario:
-    #     for mensaje in allMensajes:
-    #         palabras = get_words(mensaje)
-    #         for palabra in palabras:
-    #             if(palabra==comp):
-    #                 contador+=1
-    #                 break
-    #         if(contador>=5):
-    #             break
-    #     if(contador<5):
-    #         elDiccionario.remove(comp)
-            
-    #     contador = 0
-
+    print("Len 2: ", len(elDiccionario))
 
     return elDiccionario
 
