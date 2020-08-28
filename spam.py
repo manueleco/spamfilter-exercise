@@ -1,7 +1,5 @@
 import collections
-
 import numpy as np
-
 import util
 import svm
 import pandas as pd
@@ -109,7 +107,6 @@ def create_dictionary(messages):
         contador = 0
 
     print("Len 2: ", len(elDiccionario))
-
     return elDiccionario
 
     # *** END CODE HERE ***
@@ -136,6 +133,25 @@ def transform_text(messages, word_dictionary):
         j-th vocabulary word in the i-th message.
     """
     # *** START CODE HERE ***
+    Resultado=[]
+    i=0
+    n = len(word_dictionary)
+    for mensaje in messages:
+        palabrasEnMensaje = get_words(mensaje)
+        listaR = np.zeros((n))
+        repeticionesEnMensaje = {i:palabrasEnMensaje.count(i) for i in palabrasEnMensaje}
+        dictRept = list(repeticionesEnMensaje.keys())
+        for palabraMen in dictRept:
+            if palabraMen in word_dictionary:
+                indice=word_dictionary.index(palabraMen)
+                listaR[indice]=repeticionesEnMensaje.get(palabraMen)
+        Resultado.append(listaR)
+    return Resultado
+            
+
+
+
+
     # *** END CODE HERE ***
 
 
@@ -217,7 +233,6 @@ def main():
     test_messages, test_labels = util.load_spam_dataset('spam_test.tsv')
 
     dictionary = create_dictionary(train_messages)
-
     # print('Size of dictionary: ', len(dictionary))
 
     # util.write_json('spam_dictionary', dictionary)
